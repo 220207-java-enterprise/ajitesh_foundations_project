@@ -2,6 +2,7 @@ package com.revature.foundation;
 
 import com.revature.foundation.screens.LoginScreen;
 import com.revature.foundation.screens.RegisterScreen;
+import com.revature.foundation.screens.WelcomeScreen;
 import java.io.*;
 
 public class Driver {
@@ -16,14 +17,7 @@ public class Driver {
             throw new RuntimeException("Looped three times");
         }
 
-        String welcomeMenu = "Welcome to Quizzard!\n" +
-                             "Please make a selection from the options below:\n" +
-                             "1) Login\n" +
-                             "2) Register\n" +
-                             "3) Exit\n" +
-                             "> ";
-
-        System.out.print(welcomeMenu);
+        new WelcomeScreen().render();
 
         BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -34,15 +28,12 @@ public class Driver {
 
             switch (userSelection) {
                 case "1":
-                    System.out.println("You selected: Login");
                     new LoginScreen().render();
                     break;
                 case "2": // TODO there are better ways, all in due time
-                    System.out.println("You selected: Register");
                     new RegisterScreen().render();
                     break;
                 case "3":
-                    System.out.println("You selected: Exit");
                     return;
 
                 default:
