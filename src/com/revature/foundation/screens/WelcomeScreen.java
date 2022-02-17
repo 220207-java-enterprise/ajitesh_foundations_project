@@ -10,7 +10,7 @@ public class WelcomeScreen extends Screen {
 
     @Override
     public void render() {
-         String welcomeMenu = "Welcome to Quizzard!\n" +
+         String welcomeMenu = "Welcome to our Website!\n" +
                              "Please make a selection from the options below:\n" +
                              "1) Login\n" +
                              "2) Register\n" +

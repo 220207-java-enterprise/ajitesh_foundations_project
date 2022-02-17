@@ -21,10 +21,10 @@ public class RegisterScreen extends Screen {
         System.out.println("You selected: Register");
         System.out.println("Please provide some basic information to register an account:");
 
-        System.out.print("First name: ");
+        System.out.print("Given name: ");
         String firstName = consoleReader.readLine();
 
-        System.out.print("Last name: ");
+        System.out.print("Surname: ");
         String lastName = consoleReader.readLine();
 
         System.out.print("Email: ");
