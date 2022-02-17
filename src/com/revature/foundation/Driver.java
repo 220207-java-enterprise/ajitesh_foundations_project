@@ -1,5 +1,7 @@
 package com.revature.foundation;
 
+import com.revature.foundation.screens.LoginScreen;
+import com.revature.foundation.screens.RegisterScreen;
 import java.io.*;
 
 public class Driver {
@@ -33,9 +35,11 @@ public class Driver {
             switch (userSelection) {
                 case "1":
                     System.out.println("You selected: Login");
+                    new LoginScreen().render();
                     break;
                 case "2": // TODO there are better ways, all in due time
                     System.out.println("You selected: Register");
+                    new RegisterScreen().render();
                     break;
                 case "3":
                     System.out.println("You selected: Exit");
