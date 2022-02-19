@@ -1,7 +1,7 @@
 package com.revature.foundation.screens;
 
-//import com.revature.quizzard.models.AppUser;
-//import com.revature.quizzard.services.UserService;
+import com.revature.foundation.models.AppUser;
+import com.revature.foundation.services.UserService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 
 public class LoginScreen extends Screen {
 
-    //private final UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
     public LoginScreen() {
         super("/login");
@@ -28,8 +28,8 @@ public class LoginScreen extends Screen {
         System.out.print("Password: ");
         String password = consoleReader.readLine();
 
-        //AppUser authenticatedUser = userService.login(username, password);
-       // System.out.println(authenticatedUser);
+        AppUser authenticatedUser = userService.login(username, password);
+        System.out.println(authenticatedUser);
 
     }
 }

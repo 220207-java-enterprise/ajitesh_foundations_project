@@ -1,13 +1,13 @@
 package com.revature.foundation.screens;
 
-//import com.revature.quizzard.models.AppUser;
-//import com.revature.quizzard.services.UserService;
+import com.revature.foundation.models.AppUser;
+import com.revature.foundation.services.UserService;
 
 import java.io.*;
 
 public class RegisterScreen extends Screen {
 
-    //private final UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
     public RegisterScreen() {
         super("/register");
@@ -36,9 +36,9 @@ public class RegisterScreen extends Screen {
         System.out.print("Password: ");
         String password = consoleReader.readLine();
 
-        //AppUser newUser = new AppUser(firstName, lastName, email, username, password);
-        //AppUser registeredUser = userService.register(newUser); // TODO should this return something?
-        //System.out.println(registeredUser);
+        AppUser newUser = new AppUser(firstName, lastName, email, username, password);
+        AppUser registeredUser = userService.register(newUser); // TODO should this return something?
+        System.out.println(registeredUser);
 
     }
 
