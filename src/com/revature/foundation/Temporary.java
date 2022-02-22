@@ -5,6 +5,7 @@ import com.revature.foundation.util.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+
 public class Temporary {
 
     public static void main(String[] args) {
@@ -27,7 +28,6 @@ public class Temporary {
         } else {
             System.out.println("Success");
         }
-
     }
 }
 

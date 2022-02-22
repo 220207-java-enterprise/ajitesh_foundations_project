@@ -23,7 +23,7 @@ public class ConnectionFactory {
 
     private ConnectionFactory() {
         try {
-            props.load(new FileReader("resources/application.properties"));
+            props.load(new FileReader("src/resources/application.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,9 +37,8 @@ public class ConnectionFactory {
     }
 
     public Connection getConnection() throws SQLException {
-
+        System.out.println(props.getProperty("db-url")+ props.getProperty("db-username")+ props.getProperty("db-password"));
         Connection conn = DriverManager.getConnection(props.getProperty("db-url"), props.getProperty("db-username"), props.getProperty("db-password"));
-
         if (conn == null) {
             throw new RuntimeException("Could not establish connection with the database!");
         }
