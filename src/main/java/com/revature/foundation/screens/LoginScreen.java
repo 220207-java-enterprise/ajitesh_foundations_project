@@ -5,20 +5,18 @@ import com.revature.foundation.services.UserService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class LoginScreen extends Screen {
 
-    private final UserService userService = new UserService();
+    private final UserService userService;
 
-    public LoginScreen() {
-        super("/login");
+    public LoginScreen(BufferedReader consoleReader, UserService userService) {
+        super("/login", consoleReader);
+        this.userService = userService;
     }
 
     @Override
     public void render() throws IOException {
-
-        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Please provide your account credentials to login:");
 
@@ -29,7 +27,7 @@ public class LoginScreen extends Screen {
         String password = consoleReader.readLine();
 
         AppUser authenticatedUser = userService.login(username, password);
-        System.out.println(authenticatedUser);
+        System.out.println(authenticatedUser); // TODO go somewhere from here?
 
     }
 }
