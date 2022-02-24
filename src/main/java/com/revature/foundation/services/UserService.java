@@ -19,7 +19,7 @@ public class UserService {
 
     public AppUser register(AppUser newUser) throws IOException {
 
-        if (!isUserValid(newUser)) {
+        if (isUserValid(newUser)) {
             throw new InvalidRequestException("Bad registration details given."); // this will halt the app
         }
 
@@ -35,7 +35,7 @@ public class UserService {
 
     public AppUser login(String username, String password) {
 
-        if (!isUsernameValid(username) || !isPasswordValid(password)) {
+        if (isUsernameValid(username) || isPasswordValid(password)) {
             throw new InvalidRequestException("Invalid credentials provided!");
         }
 
