@@ -104,7 +104,7 @@ public class UserDAO implements CrudDAO<AppUser> {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO ers_users(user_id,given_name,surname,email,user_name,password,role_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO ers_users(user_id,given_name,surname,email,user_name,password,role_id,is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, newUser.getId());
             pstmt.setString(2, newUser.getFirstName());
             pstmt.setString(3, newUser.getLastName());
@@ -112,6 +112,7 @@ public class UserDAO implements CrudDAO<AppUser> {
             pstmt.setString(5, newUser.getUsername());
             pstmt.setString(6, newUser.getPassword());
             pstmt.setString(7, "7c3521f5-ff75-4e8a-9913-01d15ee4dc98"); // TODO fix with Role enum
+            pstmt.setBoolean(8,true);
 
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted != 1) {
