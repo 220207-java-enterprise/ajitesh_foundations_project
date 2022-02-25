@@ -1,1 +1,4 @@
-com/revature/foundation/TestServlet.class
+com/revature/foundation/servlets/TestServlet.class
+com/revature/foundation/servlets/AuthServlet.class
+com/revature/foundation/servlets/UserServlet.class
+com/revature/foundation/util/ContextLoaderListener.class

@@ -67,6 +67,7 @@
                         <url>http://localhost:8080/manager/text</url>
                         <server>LocalTomcat</server>
                         <path>/foundations-test</path>
+                        <update>true</update>
                     </configuration>
                 </plugin>
             </plugins>

@@ -1,4 +1,4 @@
-package com.revature.foundation;
+package com.revature.foundation.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
