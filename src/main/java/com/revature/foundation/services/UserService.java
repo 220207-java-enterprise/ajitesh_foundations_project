@@ -24,7 +24,7 @@ public class UserService {
 
         AppUser newUser = newUserRequest.extractUser();
 
-        if (!isUserValid(newUser)) {
+        if (isUserValid(newUser)) {
             throw new InvalidRequestException("Bad registration details given.");
         }
 
@@ -48,7 +48,7 @@ public class UserService {
 
     public AppUser login(String username, String password) {
 
-        if (!isUsernameValid(username) || !isPasswordValid(password)) {
+        if (isUsernameValid(username) || isPasswordValid(password)) {
             throw new InvalidRequestException("Invalid credentials provided!");
         }
 
