@@ -1,4 +1,7 @@
+com/revature/foundation/dtos/ResourceCreationResponse.class
+com/revature/foundation/dtos/NewUserRequest.class
 com/revature/foundation/servlets/TestServlet.class
 com/revature/foundation/servlets/AuthServlet.class
+com/revature/foundation/util/exceptions/ResourceConflictException.class
 com/revature/foundation/servlets/UserServlet.class
 com/revature/foundation/util/ContextLoaderListener.class

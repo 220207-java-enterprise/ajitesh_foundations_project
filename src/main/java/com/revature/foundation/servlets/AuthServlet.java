@@ -1,5 +1,6 @@
 package com.revature.foundation.servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.foundation.services.UserService;
 
 import javax.servlet.ServletException;
@@ -10,10 +11,12 @@ import java.io.IOException;
 
 public class AuthServlet extends HttpServlet {
 
-    private UserService userService;
+    private final UserService userService;
+    private final ObjectMapper mapper;
 
-    public AuthServlet(UserService userService) {
+    public AuthServlet(UserService userService, ObjectMapper mapper) {
         this.userService = userService;
+        this.mapper = mapper;
     }
 
     // Login endpoint

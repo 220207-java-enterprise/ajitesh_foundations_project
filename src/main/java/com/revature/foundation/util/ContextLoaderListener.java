@@ -1,5 +1,6 @@
 package com.revature.foundation.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.foundation.daos.UserDAO;
 import com.revature.foundation.services.UserService;
 import com.revature.foundation.servlets.AuthServlet;
@@ -12,13 +13,15 @@ import javax.servlet.ServletContextListener;
 public class ContextLoaderListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("Initializing Quizzard web application");
+        System.out.println("Initializing Foundation web application");
+
+        ObjectMapper mapper = new ObjectMapper();
 
         UserDAO userDAO = new UserDAO();
         UserService userService = new UserService(userDAO);
-        UserServlet userServlet = new UserServlet(userService);
+        UserServlet userServlet = new UserServlet(userService,mapper);
 
-        AuthServlet authServlet = new AuthServlet(userService);
+        AuthServlet authServlet = new AuthServlet(userService,mapper);
 
         // Programmatic Servlet Registration
         ServletContext context = sce.getServletContext();
