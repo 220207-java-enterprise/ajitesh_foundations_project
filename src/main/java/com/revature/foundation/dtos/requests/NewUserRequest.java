@@ -1,4 +1,4 @@
-package com.revature.foundation.dtos;
+package com.revature.foundation.dtos.requests;
 
 import com.revature.foundation.models.AppUser;
 
