@@ -1,5 +1,7 @@
 package com.revature.foundation.daos;
 
+import com.revature.foundation.models.Reimbursement;
+
 import java.util.List;
 
 public interface CrudDAO<T> {
