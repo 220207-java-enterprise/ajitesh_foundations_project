@@ -113,10 +113,12 @@ public class ReimbursementDAO implements CrudDAO <Reimbursement> {
             PreparedStatement pstmt = conn.prepareStatement("UPDATE ers_reimbursements" +
                     "SET amount = ?, " +
                     "description = ?, " +
+                    "type_id = ?,"+
                     "WHERE reimb_id = ?");
             pstmt.setDouble(1, updateReimbursement.getAmount());
             pstmt.setString(2, updateReimbursement.getDescription());
-            pstmt.setString(3, updateReimbursement.getId());
+            pstmt.setString(3,updateReimbursement.getReimbursementType().getId());
+            pstmt.setString(4, updateReimbursement.getId());
 
 
             // TODO allow role to be updated as well
