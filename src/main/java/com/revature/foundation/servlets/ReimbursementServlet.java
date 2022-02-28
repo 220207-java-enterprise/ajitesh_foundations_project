@@ -50,12 +50,12 @@ public class ReimbursementServlet extends HttpServlet {
 
         Principal requester = (Principal) session.getAttribute("authUser");
 
-        if (!requester.getRole().equals("ADMIN")) {
+        if (!requester.getRole().equals("FINANCE MANAGER")) {
             resp.setStatus(403); // FORBIDDEN
         }
 
-        List<ReimbursementResponse> users = reimbursementService.getAllReimbursements();
-        String payload = mapper.writeValueAsString(users);
+        List<ReimbursementResponse> reimbursements = reimbursementService.getAllReimbursements();
+        String payload = mapper.writeValueAsString(reimbursements);
         resp.setContentType("application/json");
         resp.getWriter().write(payload);
 
