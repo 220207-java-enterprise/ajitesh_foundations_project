@@ -5,9 +5,7 @@ import com.revature.foundation.daos.ReimbursementDAO;
 import com.revature.foundation.daos.UserDAO;
 import com.revature.foundation.services.UserService;
 import com.revature.foundation.services.ReimbursementService;
-import com.revature.foundation.servlets.AuthServlet;
-import com.revature.foundation.servlets.UserServlet;
-import com.revature.foundation.servlets.ReimbursementServlet;
+import com.revature.foundation.servlets.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -28,6 +26,9 @@ public class ContextLoaderListener implements ServletContextListener {
         ReimbursementService reimbursementService = new ReimbursementService(reimbursementDAO);
         ReimbursementServlet reimbursementServlet = new ReimbursementServlet(reimbursementService,mapper);
 
+        StatusServlet statusServlet = new StatusServlet(reimbursementService,mapper);
+        TypeServlet typeServlet = new TypeServlet(reimbursementService,mapper);
+
         AuthServlet authServlet = new AuthServlet(userService,mapper);
 
         // Programmatic Servlet Registration
@@ -35,6 +36,8 @@ public class ContextLoaderListener implements ServletContextListener {
         context.addServlet("UserServlet", userServlet).addMapping("/users/*");
         context.addServlet("AuthServlet", authServlet).addMapping("/auth");
         context.addServlet("ReimbursementServlet", reimbursementServlet).addMapping("/reimb/*");
+        context.addServlet("StatusServlet", statusServlet).addMapping("/stat_update");
+        context.addServlet("TypeServlet", typeServlet).addMapping("/type_update");
 
     }
 

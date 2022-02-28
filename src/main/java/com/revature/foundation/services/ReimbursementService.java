@@ -1,6 +1,8 @@
 package com.revature.foundation.services;
 
 import com.revature.foundation.dtos.requests.ReimbursementRequest;
+import com.revature.foundation.dtos.requests.StatusUpdateRequest;
+import com.revature.foundation.dtos.requests.TypeUpdateRequest;
 import com.revature.foundation.dtos.responses.ReimbursementResponse;
 import com.revature.foundation.models.Reimbursement;
 import com.revature.foundation.models.ReimbursementStatus;
@@ -39,6 +41,38 @@ public class ReimbursementService {
         reimbursement.setReimbursementType(new ReimbursementType("7c3521f5-ff75-4e8a-9913-01d15ee4dc9d","OTHER"));
 
         reimbursementDAO.save(reimbursement);
+        return reimbursement;
+    }
+
+    public Reimbursement update_type(TypeUpdateRequest typeUpdateRequest){
+        Reimbursement reimbursement = reimbursementDAO.getById(typeUpdateRequest.getReimb_id());
+        if (typeUpdateRequest.getType_id().equals("7c3521f5-ff75-4e8a-9913-01d15ee4dc9d")){
+            reimbursement.setReimbursementType(new ReimbursementType("7c3521f5-ff75-4e8a-9913-01d15ee4dc9d","OTHER"));
+        }
+        else if(typeUpdateRequest.getType_id().equals("7c3521f5-ff75-4e8a-9913-01d15ee4dc9c")){
+            reimbursement.setReimbursementType(new ReimbursementType("7c3521f5-ff75-4e8a-9913-01d15ee4dc9c","FOOD"));
+        }
+        else if(typeUpdateRequest.getType_id().equals("7c3521f5-ff75-4e8a-9913-01d15ee4dc9b")){
+            reimbursement.setReimbursementType(new ReimbursementType("7c3521f5-ff75-4e8a-9913-01d15ee4dc9b","TRAVEL"));
+        }
+        else if(typeUpdateRequest.getType_id().equals("7c3521f5-ff75-4e8a-9913-01d15ee4dc9a")){
+            reimbursement.setReimbursementType(new ReimbursementType("7c3521f5-ff75-4e8a-9913-01d15ee4dc9a","LODGING"));
+        }
+        reimbursementDAO.update_type(reimbursement);
+        return reimbursement;
+    }
+    public Reimbursement update_status(StatusUpdateRequest statusUpdateRequest){
+        Reimbursement reimbursement = reimbursementDAO.getById(statusUpdateRequest.getReimb_id());
+        if (statusUpdateRequest.getStatus_id().equals("7c3521f5-ff75-4e8a-9913-01d15ee4dc9e")){
+            reimbursement.setReimbursementStatus(new ReimbursementStatus("7c3521f5-ff75-4e8a-9913-01d15ee4dc9e","PENDING"));
+        }
+        else if(statusUpdateRequest.getStatus_id().equals("7c3521f5-ff75-4e8a-9913-01d15ee4dc9f")){
+            reimbursement.setReimbursementStatus(new ReimbursementStatus("7c3521f5-ff75-4e8a-9913-01d15ee4dc9f","APPROVED"));
+        }
+        else if(statusUpdateRequest.getStatus_id().equals("7c3521f5-ff75-4e8a-9913-01d15ee4dc9g")){
+            reimbursement.setReimbursementStatus(new ReimbursementStatus("7c3521f5-ff75-4e8a-9913-01d15ee4dc9g","DENIED"));
+        }
+        reimbursementDAO.update_status(reimbursement);
         return reimbursement;
     }
 

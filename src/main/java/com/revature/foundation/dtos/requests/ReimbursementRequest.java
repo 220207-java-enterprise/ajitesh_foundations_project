@@ -1,7 +1,6 @@
 package com.revature.foundation.dtos.requests;
 
 import com.revature.foundation.models.Reimbursement;
-import com.revature.foundation.models.ReimbursementType;
 
 public class ReimbursementRequest {
     private double amount;

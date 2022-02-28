@@ -113,12 +113,14 @@ public class ReimbursementDAO implements CrudDAO <Reimbursement> {
             PreparedStatement pstmt = conn.prepareStatement("UPDATE ers_reimbursements" +
                     "SET amount = ?, " +
                     "desciption = ?, " +
-                    "type_id = ?,"+
+                    "type_id = ?, "+
+                    "status_id = ? "+
                     "WHERE reimb_id = ?");
             pstmt.setDouble(1, updateReimbursement.getAmount());
             pstmt.setString(2, updateReimbursement.getDescription());
             pstmt.setString(3,updateReimbursement.getReimbursementType().getId());
-            pstmt.setString(4, updateReimbursement.getId());
+            pstmt.setString(4,updateReimbursement.getReimbursementStatus().getId());
+            pstmt.setString(5, updateReimbursement.getId());
 
 
             // TODO allow role to be updated as well
@@ -134,6 +136,56 @@ public class ReimbursementDAO implements CrudDAO <Reimbursement> {
             throw new DataSourceException(e);
         }
 
+    }
+
+    public void update_status(Reimbursement updateReimbursement){
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE ers_reimbursements " +
+                    "SET status_id = ? "+
+                    "WHERE reimb_id = ?");
+            pstmt.setString(1,updateReimbursement.getReimbursementStatus().getId());
+            pstmt.setString(2, updateReimbursement.getId());
+
+
+            // TODO allow role to be updated as well
+
+            int rowsInserted = pstmt.executeUpdate();
+            if (rowsInserted != 1) {
+                throw new ResourcePersistenceException("Failed to update reimbursement data within datasource.");
+            }
+
+            conn.commit();
+
+        } catch (SQLException e) {
+            throw new DataSourceException(e);
+        }
+    }
+
+    public void update_type(Reimbursement updateReimbursement){
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE ers_reimbursements " +
+                    "SET type_id = ? "+
+                    "WHERE reimb_id = ?");
+            pstmt.setString(1,updateReimbursement.getReimbursementType().getId());
+            pstmt.setString(2, updateReimbursement.getId());
+
+
+            // TODO allow role to be updated as well
+
+            int rowsInserted = pstmt.executeUpdate();
+            if (rowsInserted != 1) {
+                throw new ResourcePersistenceException("Failed to update reimbursement data within datasource.");
+            }
+
+            conn.commit();
+
+        } catch (SQLException e) {
+            throw new DataSourceException(e);
+        }
     }
 
     @Override
