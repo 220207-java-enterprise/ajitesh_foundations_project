@@ -15,9 +15,10 @@ public class Reimbursement {
         super();
     }
 
-    public Reimbursement(double amount,String description) {
+    public Reimbursement(double amount,String description, String author_id) {
         this.amount = amount;
         this.description = description;
+        this.author_id = author_id;
     }
 
     public String getId() {

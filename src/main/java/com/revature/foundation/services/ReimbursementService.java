@@ -34,8 +34,8 @@ public class ReimbursementService {
 
         reimbursement.setId(UUID.randomUUID().toString());
         reimbursement.setReimbursementStatus(new ReimbursementStatus("7c3521f5-ff75-4e8a-9913-01d15ee4dc9e","PENDING"));
-        reimbursement.setResolver_id("3363b6d7-6592-45fc-bcff-8f968a26a514");
-        reimbursement.setAuthor_id("b9616166-c655-47d0-b247-b51b25c6879f");
+        reimbursement.setResolver_id("5ff00a27-3361-4615-97b9-9dd1a81f9171");
+        //reimbursement.setAuthor_id("b9616166-c655-47d0-b247-b51b25c6879f");
         reimbursement.setReimbursementType(new ReimbursementType("7c3521f5-ff75-4e8a-9913-01d15ee4dc9d","OTHER"));
 
         reimbursementDAO.save(reimbursement);
