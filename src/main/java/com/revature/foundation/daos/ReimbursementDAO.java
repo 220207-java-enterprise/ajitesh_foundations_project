@@ -15,7 +15,7 @@ import java.util.List;
 public class ReimbursementDAO implements CrudDAO <Reimbursement> {
 
     private final String rootSelect = "SELECT " +
-            "ers.reimb_id, ers.numeric, ers.description, ers.author_id, ers.resolver_id, ers.status_id, ers.type_id, rs.status, rt.type " +
+            "ers.reimb_id, ers.amount, ers.desciption, ers.author_id, ers.resolver_id, ers.status_id, ers.type_id, rs.status, rt.type " +
             "FROM ers_reimbursements ers " +
             "JOIN reimbursement_statuses rs " +
             "ON ers.status_id = rs.status_id " +
@@ -27,7 +27,7 @@ public class ReimbursementDAO implements CrudDAO <Reimbursement> {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO ers_reimbursements (reimb_id, amount, description, author_id, resolver_id, status_id, type_id, submitted)  VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO ers_reimbursements (reimb_id, amount, desciption, author_id, resolver_id, status_id, type_id, submitted)  VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, newReimbursement.getId());
             pstmt.setDouble(2, newReimbursement.getAmount());
             pstmt.setString(3, newReimbursement.getDescription());
@@ -66,7 +66,7 @@ public class ReimbursementDAO implements CrudDAO <Reimbursement> {
                 reimb = new Reimbursement();
                 reimb.setId(rs.getString("reimb_id"));
                 reimb.setAmount(rs.getDouble("amount"));
-                reimb.setDescription(rs.getString("description"));
+                reimb.setDescription(rs.getString("desciption"));
                 reimb.setAuthor_id(rs.getString("author_id"));
                 reimb.setResolver_id(rs.getString("resolver_id"));
                 reimb.setReimbursementStatus(new ReimbursementStatus((rs.getString("status_id")),rs.getString("status")));
@@ -91,7 +91,7 @@ public class ReimbursementDAO implements CrudDAO <Reimbursement> {
                 Reimbursement reimb = new Reimbursement();
                 reimb.setId(rs.getString("reimb_id"));
                 reimb.setAmount(rs.getDouble("amount"));
-                reimb.setDescription(rs.getString("description"));
+                reimb.setDescription(rs.getString("desciption"));
                 reimb.setAuthor_id(rs.getString("author_id"));
                 reimb.setResolver_id(rs.getString("resolver_id"));
                 reimb.setReimbursementStatus(new ReimbursementStatus((rs.getString("status_id")),rs.getString("status")));
@@ -112,7 +112,7 @@ public class ReimbursementDAO implements CrudDAO <Reimbursement> {
             conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement("UPDATE ers_reimbursements" +
                     "SET amount = ?, " +
-                    "description = ?, " +
+                    "desciption = ?, " +
                     "type_id = ?,"+
                     "WHERE reimb_id = ?");
             pstmt.setDouble(1, updateReimbursement.getAmount());

@@ -15,10 +15,9 @@ public class Reimbursement {
         super();
     }
 
-    public Reimbursement(double amount,String description, ReimbursementType type) {
+    public Reimbursement(double amount,String description) {
         this.amount = amount;
         this.description = description;
-        this.type = type;
     }
 
     public String getId() {
@@ -92,7 +91,7 @@ public class Reimbursement {
 
     @Override
     public String toString() {
-        return "Flashcard{" +
+        return "Reimbursement{" +
                 "id='" + id + '\'' +
                 ", amount='" + amount + '\'' +
                 ", description='" + description + '\'' +

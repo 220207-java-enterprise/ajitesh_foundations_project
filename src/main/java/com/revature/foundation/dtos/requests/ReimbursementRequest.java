@@ -6,14 +6,12 @@ import com.revature.foundation.models.ReimbursementType;
 public class ReimbursementRequest {
     private double amount;
     private String description;
-    private ReimbursementType type;
 
     public ReimbursementRequest(){ super();}
 
-    public ReimbursementRequest(double amount, String description, ReimbursementType type){
+    public ReimbursementRequest(double amount, String description){
         this.amount = amount;
         this.description = description;
-        this.type = type;
     }
 
     public double getAmount(){return amount;}
@@ -24,20 +22,15 @@ public class ReimbursementRequest {
 
     public void setDescription(String description){this.description=description;}
 
-    public ReimbursementType getType(){return type;}
-
-    public void setType(ReimbursementType type) {this.type = type;}
 
     public Reimbursement extractReimbursement() {
-        return new Reimbursement(amount, description, type);
+        return new Reimbursement(amount, description);
     }
 
     public String toString() {
         return "ReimbursementRequest{" +
                 "amount='" + amount + '\'' +
                 ", description='" + description + '\'' +
-                ", type_id='" + type.getId() + '\'' +
-                ", type_name='" + type.getTypeName() + '\'' +
                 '}';
     }
 
