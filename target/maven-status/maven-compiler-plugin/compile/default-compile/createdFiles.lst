@@ -11,12 +11,14 @@ com/revature/foundation/services/ReimbursementService.class
 com/revature/foundation/dtos/responses/StatusUpdateResponse.class
 com/revature/foundation/models/ReimbursementType.class
 com/revature/foundation/dtos/responses/TypeUpdateResponse.class
+com/revature/foundation/dtos/requests/DeleteRequest.class
 com/revature/foundation/servlets/AuthServlet.class
 com/revature/foundation/dtos/responses/ResourceCreationResponse.class
 com/revature/foundation/util/exceptions/ResourceConflictException.class
 com/revature/foundation/dtos/responses/AppUserResponse.class
 com/revature/foundation/models/UserRole.class
 com/revature/foundation/servlets/UserServlet.class
+com/revature/foundation/dtos/responses/DeleteResponse.class
 com/revature/foundation/servlets/StatusServlet.class
 com/revature/foundation/util/ContextLoaderListener.class
 com/revature/foundation/dtos/requests/StatusUpdateRequest.class

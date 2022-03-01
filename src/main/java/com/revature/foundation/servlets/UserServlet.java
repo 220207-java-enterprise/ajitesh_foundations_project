@@ -2,8 +2,10 @@ package com.revature.foundation.servlets;
 
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.foundation.dtos.requests.DeleteRequest;
 import com.revature.foundation.dtos.requests.NewUserRequest;
 import com.revature.foundation.dtos.responses.AppUserResponse;
+import com.revature.foundation.dtos.responses.DeleteResponse;
 import com.revature.foundation.dtos.responses.Principal;
 import com.revature.foundation.dtos.responses.ResourceCreationResponse;
 import com.revature.foundation.models.AppUser;
@@ -76,6 +78,31 @@ public class UserServlet extends HttpServlet {
             resp.setStatus(201); // CREATED
             resp.setContentType("application/json");
             String payload = mapper.writeValueAsString(new ResourceCreationResponse(newUser.getId()));
+            respWriter.write(payload);
+
+        } catch (InvalidRequestException | DatabindException e) {
+            e.printStackTrace();
+            resp.setStatus(400); // BAD REQUEST
+        } catch (ResourceConflictException e) {
+            resp.setStatus(409); // CONFLICT
+        } catch (Exception e) {
+            e.printStackTrace(); // include for debugging purposes; ideally log it to a file
+            resp.setStatus(500);
+        }
+
+    }
+    @Override
+    protected void doDelete (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        PrintWriter respWriter = resp.getWriter();
+
+        try {
+
+            DeleteRequest request = mapper.readValue(req.getInputStream(), DeleteRequest.class);
+            AppUser newUser = userService.delete(request);
+            resp.setStatus(204); // DELETED
+            resp.setContentType("application/json");
+            String payload = mapper.writeValueAsString(new DeleteResponse());
             respWriter.write(payload);
 
         } catch (InvalidRequestException | DatabindException e) {

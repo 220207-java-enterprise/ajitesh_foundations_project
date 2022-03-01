@@ -1,5 +1,6 @@
 package com.revature.foundation.services;
 
+import com.revature.foundation.dtos.requests.DeleteRequest;
 import com.revature.foundation.dtos.requests.LoginRequest;
 import com.revature.foundation.dtos.requests.NewUserRequest;
 import com.revature.foundation.dtos.responses.AppUserResponse;
@@ -88,6 +89,16 @@ public class UserService {
 
         return authUser;
 
+    }
+
+    public AppUser delete(DeleteRequest deleteRequest){
+        String id = deleteRequest.getId();
+
+        AppUser appUser = userDAO.getById(id);
+
+        userDAO.deleteById(id);
+
+        return appUser;
     }
 
     private boolean isUserValid(AppUser appUser) {
