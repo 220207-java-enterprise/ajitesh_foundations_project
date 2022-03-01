@@ -143,10 +143,12 @@ public class ReimbursementDAO implements CrudDAO <Reimbursement> {
 
             conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement("UPDATE ers_reimbursements " +
-                    "SET status_id = ? "+
+                    "SET status_id = ?, "+
+                    "resolved = ? "+
                     "WHERE reimb_id = ?");
             pstmt.setString(1,updateReimbursement.getReimbursementStatus().getId());
-            pstmt.setString(2, updateReimbursement.getId());
+            pstmt.setTimestamp(2,new Timestamp(System.currentTimeMillis()));
+            pstmt.setString(3, updateReimbursement.getId());
 
 
             // TODO allow role to be updated as well
@@ -168,10 +170,12 @@ public class ReimbursementDAO implements CrudDAO <Reimbursement> {
 
             conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement("UPDATE ers_reimbursements " +
-                    "SET type_id = ? "+
+                    "SET type_id = ?, "+
+                    "resolved = ? "+
                     "WHERE reimb_id = ?");
             pstmt.setString(1,updateReimbursement.getReimbursementType().getId());
-            pstmt.setString(2, updateReimbursement.getId());
+            pstmt.setTimestamp(2,new Timestamp(System.currentTimeMillis()));
+            pstmt.setString(3, updateReimbursement.getId());
 
 
             // TODO allow role to be updated as well
