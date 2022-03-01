@@ -4,8 +4,10 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.foundation.dtos.requests.LoginRequest;
 import com.revature.foundation.dtos.requests.StatusUpdateRequest;
+import com.revature.foundation.dtos.requests.TypeFilterRequest;
 import com.revature.foundation.dtos.requests.TypeUpdateRequest;
 import com.revature.foundation.dtos.responses.Principal;
+import com.revature.foundation.dtos.responses.ReimbursementResponse;
 import com.revature.foundation.dtos.responses.StatusUpdateResponse;
 import com.revature.foundation.dtos.responses.TypeUpdateResponse;
 import com.revature.foundation.models.AppUser;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 public class TypeServlet extends HttpServlet {
     private final ReimbursementService reimbursementService;
@@ -31,6 +34,34 @@ public class TypeServlet extends HttpServlet {
     public TypeServlet(ReimbursementService reimbursementService, ObjectMapper mapper) {
         this.reimbursementService = reimbursementService;
         this.mapper = mapper;
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String[] reqFrags = req.getRequestURI().split("/");
+
+        // TODO implement some security logic here to protect sensitive operations
+
+        // get users (all, by id, by w/e)
+        HttpSession session = req.getSession(false);
+        if (session == null) {
+            resp.setStatus(401);
+            return;
+        }
+
+        Principal requester = (Principal) session.getAttribute("authUser");
+
+        if (!requester.getRole().equals("FINANCE MANAGER")) {
+            resp.setStatus(403); // FORBIDDEN
+        }
+        TypeFilterRequest typeFilterRequest = mapper.readValue(req.getInputStream(), TypeFilterRequest.class);
+        List<ReimbursementResponse> reimbursements = reimbursementService.getTypeReimbursements(typeFilterRequest.getType_id());
+        String payload = mapper.writeValueAsString(reimbursements);
+        resp.setContentType("application/json");
+        resp.getWriter().write(payload);
+
+
     }
 
     @Override

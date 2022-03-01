@@ -18,7 +18,7 @@ public class TypeUpdateRequest {
 
     public String toString() {
         return "UpdateRequest{" +
-                "stype_id='" + type_id + '\'' +
+                "type_id='" + type_id + '\'' +
                 ", password='" + reimb_id + '\'' +
                 '}';
     }
