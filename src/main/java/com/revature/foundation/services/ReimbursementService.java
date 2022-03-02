@@ -3,6 +3,7 @@ package com.revature.foundation.services;
 import com.revature.foundation.dtos.requests.ReimbursementRequest;
 import com.revature.foundation.dtos.requests.StatusUpdateRequest;
 import com.revature.foundation.dtos.requests.TypeUpdateRequest;
+import com.revature.foundation.dtos.requests.UpdateReimbursementRequest;
 import com.revature.foundation.dtos.responses.ReimbursementResponse;
 import com.revature.foundation.models.Reimbursement;
 import com.revature.foundation.models.ReimbursementStatus;
@@ -81,6 +82,21 @@ public class ReimbursementService {
         }
         reimbursementDAO.update_status(reimbursement);
         return reimbursement;
+    }
+
+    public Reimbursement update(UpdateReimbursementRequest updateReimbursementRequest){
+        String id = updateReimbursementRequest.getId();
+        Reimbursement reimbursement = reimbursementDAO.getById(id);
+
+        if(updateReimbursementRequest.getAmount() >= 0.0){
+            reimbursement.setAmount(updateReimbursementRequest.getAmount());
+        }
+        if(updateReimbursementRequest.getDescription() != null){
+            reimbursement.setDescription(updateReimbursementRequest.getDescription());
+        }
+
+        reimbursementDAO.update(reimbursement);
+        return  reimbursement;
     }
 
 

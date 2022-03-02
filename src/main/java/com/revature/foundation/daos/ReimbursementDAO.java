@@ -166,7 +166,7 @@ public class ReimbursementDAO implements CrudDAO <Reimbursement> {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE ers_reimbursements" +
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE ers_reimbursements " +
                     "SET amount = ?, " +
                     "desciption = ?, " +
                     "type_id = ?, "+

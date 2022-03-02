@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.foundation.dtos.requests.NewUserRequest;
 import com.revature.foundation.dtos.requests.ReimbursementRequest;
+import com.revature.foundation.dtos.requests.UpdateReimbursementRequest;
 import com.revature.foundation.dtos.responses.ReimbursementResponse;
 import com.revature.foundation.dtos.responses.AppUserResponse;
 import com.revature.foundation.dtos.responses.Principal;
@@ -85,10 +86,32 @@ public class ReimbursementServlet extends HttpServlet {
             e.printStackTrace(); // include for debugging purposes; ideally log it to a file
             resp.setStatus(500);
         }
+    }
+    @Override
+    protected void doPut (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        PrintWriter respWriter = resp.getWriter();
+
+        try {
+
+            UpdateReimbursementRequest reimbursementRequest = mapper.readValue(req.getInputStream(), UpdateReimbursementRequest.class);
+            Reimbursement reimbursement = reimbursementService.update(reimbursementRequest);
+            resp.setStatus(200); // UPDATED
+            resp.setContentType("application/json");
+            String payload = mapper.writeValueAsString(new ResourceCreationResponse(reimbursement.getId()));
+            respWriter.write(payload);
+
+        } catch (InvalidRequestException | DatabindException e) {
+            e.printStackTrace();
+            resp.setStatus(400); // BAD REQUEST
+        } catch (ResourceConflictException e) {
+            resp.setStatus(409); // CONFLICT
+        } catch (Exception e) {
+            e.printStackTrace(); // include for debugging purposes; ideally log it to a file
+            resp.setStatus(500);
+        }
 
     }
-
-
 
 
 }
