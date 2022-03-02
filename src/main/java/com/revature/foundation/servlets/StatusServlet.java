@@ -53,7 +53,8 @@ public class StatusServlet extends HttpServlet {
         Principal requester = (Principal) session.getAttribute("authUser");
 
         if (!requester.getRole().equals("FINANCE MANAGER")) {
-            resp.setStatus(403); // FORBIDDEN
+            resp.setStatus(403);
+            return;// FORBIDDEN
         }
         StatusFilterRequest statusFilterRequest = mapper.readValue(req.getInputStream(), StatusFilterRequest.class);
         List<ReimbursementResponse> reimbursements = reimbursementService.getStatusReimbursements(statusFilterRequest.getStatus_id());
@@ -67,6 +68,24 @@ public class StatusServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String[] reqFrags = req.getRequestURI().split("/");
+
+        // TODO implement some security logic here to protect sensitive operations
+
+        // get users (all, by id, by w/e)
+        HttpSession session = req.getSession(false);
+        if (session == null) {
+            resp.setStatus(401);
+            return;
+        }
+
+        Principal requester = (Principal) session.getAttribute("authUser");
+
+        if (!requester.getRole().equals("FINANCE MANAGER")) {
+            resp.setStatus(403);
+            return;// FORBIDDEN
+        }
+
 
         PrintWriter writer = resp.getWriter();
 

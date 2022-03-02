@@ -41,7 +41,8 @@ public class MyReimbursementServlet extends HttpServlet {
         Principal requester = (Principal) session.getAttribute("authUser");
 
         if (!requester.getRole().equals("EMPLOYEE")) {
-            resp.setStatus(403); // FORBIDDEN
+            resp.setStatus(403);
+            return;// FORBIDDEN
         }
 
         ViewReimbursementRequest viewReimbursementRequest = mapper.readValue(req.getInputStream(), ViewReimbursementRequest.class);

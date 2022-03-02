@@ -52,7 +52,8 @@ public class UserServlet extends HttpServlet {
         Principal requester = (Principal) session.getAttribute("authUser");
 
         if (!requester.getRole().equals("ADMIN")) {
-            resp.setStatus(403); // FORBIDDEN
+            resp.setStatus(403);
+            return;// FORBIDDEN
         }
 
         List<AppUserResponse> users = userService.getAllUsers();
@@ -66,6 +67,28 @@ public class UserServlet extends HttpServlet {
     // registration endpoint
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String[] reqFrags = req.getRequestURI().split("/");
+        if (reqFrags.length == 4 && reqFrags[3].equals("availability")) {
+            checkAvailability(req, resp);
+            return; // necessary, otherwise we end up doing more work than was requested
+        }
+
+        // TODO implement some security logic here to protect sensitive operations
+
+        // get users (all, by id, by w/e)
+        HttpSession session = req.getSession(false);
+        if (session == null) {
+            resp.setStatus(401);
+            return;
+        }
+
+        Principal requester = (Principal) session.getAttribute("authUser");
+
+        if (!requester.getRole().equals("ADMIN")) {
+            resp.setStatus(403);
+            return;// FORBIDDEN
+        }
 
         PrintWriter respWriter = resp.getWriter();
 
@@ -92,6 +115,28 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doDelete (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        String[] reqFrags = req.getRequestURI().split("/");
+        if (reqFrags.length == 4 && reqFrags[3].equals("availability")) {
+            checkAvailability(req, resp);
+            return; // necessary, otherwise we end up doing more work than was requested
+        }
+
+        // TODO implement some security logic here to protect sensitive operations
+
+        // get users (all, by id, by w/e)
+        HttpSession session = req.getSession(false);
+        if (session == null) {
+            resp.setStatus(401);
+            return;
+        }
+
+        Principal requester = (Principal) session.getAttribute("authUser");
+
+        if (!requester.getRole().equals("ADMIN")) {
+            resp.setStatus(403);
+            return;// FORBIDDEN
+        }
+
         PrintWriter respWriter = resp.getWriter();
 
         try {
@@ -117,6 +162,28 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPut (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String[] reqFrags = req.getRequestURI().split("/");
+        if (reqFrags.length == 4 && reqFrags[3].equals("availability")) {
+            checkAvailability(req, resp);
+            return; // necessary, otherwise we end up doing more work than was requested
+        }
+
+        // TODO implement some security logic here to protect sensitive operations
+
+        // get users (all, by id, by w/e)
+        HttpSession session = req.getSession(false);
+        if (session == null) {
+            resp.setStatus(401);
+            return;
+        }
+
+        Principal requester = (Principal) session.getAttribute("authUser");
+
+        if (!requester.getRole().equals("ADMIN")) {
+            resp.setStatus(403);
+            return;// FORBIDDEN
+        }
 
         PrintWriter respWriter = resp.getWriter();
 
