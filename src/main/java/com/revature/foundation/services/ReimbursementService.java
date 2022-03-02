@@ -38,6 +38,9 @@ public class ReimbursementService {
     public List<ReimbursementResponse> getStatusReimbursements(String id){
         return reimbursementDAO.getByStatus(id).stream().map(ReimbursementResponse::new).collect(Collectors.toList());
     }
+    public List<ReimbursementResponse> getMyReimbursements(String id){
+        return reimbursementDAO.getByAuthor(id).stream().map(ReimbursementResponse::new).collect(Collectors.toList());
+    }
 
     public Reimbursement register_reimbursement(ReimbursementRequest reimbursementRequest) throws IOException{
         Reimbursement reimbursement = reimbursementRequest.extractReimbursement();

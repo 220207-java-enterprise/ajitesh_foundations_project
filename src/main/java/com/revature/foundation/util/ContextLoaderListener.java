@@ -30,6 +30,7 @@ public class ContextLoaderListener implements ServletContextListener {
         TypeServlet typeServlet = new TypeServlet(reimbursementService,mapper);
 
         AuthServlet authServlet = new AuthServlet(userService,mapper);
+        MyReimbursementServlet myReimbursementServlet = new MyReimbursementServlet(reimbursementService,mapper);
 
         // Programmatic Servlet Registration
         ServletContext context = sce.getServletContext();
@@ -38,6 +39,7 @@ public class ContextLoaderListener implements ServletContextListener {
         context.addServlet("ReimbursementServlet", reimbursementServlet).addMapping("/reimb/*");
         context.addServlet("StatusServlet", statusServlet).addMapping("/stat_update");
         context.addServlet("TypeServlet", typeServlet).addMapping("/type_update");
+        context.addServlet("MyReimbursementServlet", myReimbursementServlet).addMapping("/myreimb");
 
     }
 

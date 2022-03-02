@@ -15,6 +15,7 @@ com/revature/foundation/dtos/responses/AppUserResponse.class
 com/revature/foundation/models/UserRole.class
 com/revature/foundation/servlets/UserServlet.class
 com/revature/foundation/dtos/responses/DeleteResponse.class
+com/revature/foundation/dtos/requests/ViewReimbursementRequest.class
 com/revature/foundation/servlets/StatusServlet.class
 com/revature/foundation/dtos/requests/StatusUpdateRequest.class
 com/revature/foundation/dtos/requests/TypeUpdateRequest.class
@@ -26,6 +27,7 @@ com/revature/foundation/dtos/requests/TypeFilterRequest.class
 com/revature/foundation/servlets/AuthServlet.class
 com/revature/foundation/dtos/responses/ResourceCreationResponse.class
 com/revature/foundation/util/exceptions/ResourceConflictException.class
+com/revature/foundation/servlets/MyReimbursementServlet.class
 com/revature/foundation/dtos/requests/StatusFilterRequest.class
 com/revature/foundation/util/ContextLoaderListener.class
 com/revature/foundation/dtos/responses/ReimbursementResponse.class
