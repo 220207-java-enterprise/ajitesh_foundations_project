@@ -4,10 +4,8 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.foundation.dtos.requests.DeleteRequest;
 import com.revature.foundation.dtos.requests.NewUserRequest;
-import com.revature.foundation.dtos.responses.AppUserResponse;
-import com.revature.foundation.dtos.responses.DeleteResponse;
-import com.revature.foundation.dtos.responses.Principal;
-import com.revature.foundation.dtos.responses.ResourceCreationResponse;
+import com.revature.foundation.dtos.requests.UpdateUserRequest;
+import com.revature.foundation.dtos.responses.*;
 import com.revature.foundation.models.AppUser;
 import com.revature.foundation.services.UserService;
 import com.revature.foundation.util.exceptions.InvalidRequestException;
@@ -103,6 +101,32 @@ public class UserServlet extends HttpServlet {
             resp.setStatus(204); // DELETED
             resp.setContentType("application/json");
             String payload = mapper.writeValueAsString(new DeleteResponse());
+            respWriter.write(payload);
+
+        } catch (InvalidRequestException | DatabindException e) {
+            e.printStackTrace();
+            resp.setStatus(400); // BAD REQUEST
+        } catch (ResourceConflictException e) {
+            resp.setStatus(409); // CONFLICT
+        } catch (Exception e) {
+            e.printStackTrace(); // include for debugging purposes; ideally log it to a file
+            resp.setStatus(500);
+        }
+
+    }
+
+    @Override
+    protected void doPut (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        PrintWriter respWriter = resp.getWriter();
+
+        try {
+
+            UpdateUserRequest request = mapper.readValue(req.getInputStream(), UpdateUserRequest.class);
+            AppUser newUser = userService.update(request);
+            resp.setStatus(200); // UPDATED
+            resp.setContentType("application/json");
+            String payload = mapper.writeValueAsString(new UpdateUserResponse(newUser));
             respWriter.write(payload);
 
         } catch (InvalidRequestException | DatabindException e) {

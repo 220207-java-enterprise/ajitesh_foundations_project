@@ -20,8 +20,9 @@ public class UserRole {
         return id;
     }
 
-    public void setId(String id) {
+    public UserRole setId(String id) {
         this.id = id;
+        return null;
     }
 
     public String getRoleName() {

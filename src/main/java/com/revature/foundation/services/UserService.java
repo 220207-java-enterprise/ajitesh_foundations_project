@@ -3,6 +3,7 @@ package com.revature.foundation.services;
 import com.revature.foundation.dtos.requests.DeleteRequest;
 import com.revature.foundation.dtos.requests.LoginRequest;
 import com.revature.foundation.dtos.requests.NewUserRequest;
+import com.revature.foundation.dtos.requests.UpdateUserRequest;
 import com.revature.foundation.dtos.responses.AppUserResponse;
 import com.revature.foundation.models.AppUser;
 import com.revature.foundation.daos.UserDAO;
@@ -97,6 +98,36 @@ public class UserService {
         AppUser appUser = userDAO.getById(id);
 
         userDAO.deleteById(id);
+
+        return appUser;
+    }
+
+    public AppUser update(UpdateUserRequest updateUserRequest){
+        String id = updateUserRequest.getId();
+
+        AppUser appUser = userDAO.getById(id);
+
+        if (updateUserRequest.getEmail() != null){
+            appUser.setEmail(updateUserRequest.getEmail());
+        }
+
+        if (updateUserRequest.getFirstName() != null){
+            appUser.setFirstName(updateUserRequest.getFirstName());
+        }
+
+        if (updateUserRequest.getLastName() != null){
+            appUser.setLastName(updateUserRequest.getLastName());
+        }
+
+        if (updateUserRequest.getPassword() != null){
+            appUser.setPassword(updateUserRequest.getPassword());
+        }
+
+        if (updateUserRequest.getUsername() != null){
+            appUser.setUsername(updateUserRequest.getUsername());
+        }
+
+        userDAO.update(appUser);
 
         return appUser;
     }
