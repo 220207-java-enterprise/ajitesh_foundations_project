@@ -127,6 +127,18 @@ public class UserService {
             appUser.setUsername(updateUserRequest.getUsername());
         }
 
+        if (updateUserRequest.getRole_id() != null){
+            if (updateUserRequest.getRole_id().equals("7c3521f5-ff75-4e8a-9913-01d15ee4dc96")){
+                appUser.setRole(new UserRole("7c3521f5-ff75-4e8a-9913-01d15ee4dc96","ADMIN"));
+            }
+            else if (updateUserRequest.getRole_id().equals("7c3521f5-ff75-4e8a-9913-01d15ee4dc97")){
+                appUser.setRole(new UserRole("7c3521f5-ff75-4e8a-9913-01d15ee4dc97","FINANCE MANAGER"));
+            }
+            else if (updateUserRequest.getRole_id().equals("7c3521f5-ff75-4e8a-9913-01d15ee4dc98")){
+                appUser.setRole(new UserRole("7c3521f5-ff75-4e8a-9913-01d15ee4dc98","EMPLOYEE"));
+            }
+        }
+
         userDAO.update(appUser);
 
         return appUser;
