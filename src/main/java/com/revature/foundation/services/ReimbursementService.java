@@ -90,16 +90,17 @@ public class ReimbursementService {
     public Reimbursement update(UpdateReimbursementRequest updateReimbursementRequest){
         String id = updateReimbursementRequest.getId();
         Reimbursement reimbursement = reimbursementDAO.getById(id);
-
-        if(updateReimbursementRequest.getAmount() >= 0.0){
-            reimbursement.setAmount(updateReimbursementRequest.getAmount());
+        if(reimbursement.getReimbursementStatus().getStatusName().equals("PENDING")) {
+            if (updateReimbursementRequest.getAmount() >= 0.0) {
+                reimbursement.setAmount(updateReimbursementRequest.getAmount());
+            }
+            if (updateReimbursementRequest.getDescription() != null) {
+                reimbursement.setDescription(updateReimbursementRequest.getDescription());
+            }
         }
-        if(updateReimbursementRequest.getDescription() != null){
-            reimbursement.setDescription(updateReimbursementRequest.getDescription());
-        }
+            reimbursementDAO.update(reimbursement);
+            return reimbursement;
 
-        reimbursementDAO.update(reimbursement);
-        return  reimbursement;
     }
 
 
