@@ -191,7 +191,7 @@ public class UserServlet extends HttpServlet {
 
             UpdateUserRequest request = mapper.readValue(req.getInputStream(), UpdateUserRequest.class);
             AppUser newUser = userService.update(request);
-            resp.setStatus(200); // UPDATED
+            resp.setStatus(202); // UPDATED
             resp.setContentType("application/json");
             String payload = mapper.writeValueAsString(new UpdateUserResponse(newUser));
             respWriter.write(payload);

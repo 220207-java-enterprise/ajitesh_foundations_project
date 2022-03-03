@@ -38,7 +38,6 @@ public class TypeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String[] reqFrags = req.getRequestURI().split("/");
 
         // TODO implement some security logic here to protect sensitive operations

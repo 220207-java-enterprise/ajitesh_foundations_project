@@ -132,7 +132,7 @@ public class ReimbursementServlet extends HttpServlet {
 
             UpdateReimbursementRequest reimbursementRequest = mapper.readValue(req.getInputStream(), UpdateReimbursementRequest.class);
             Reimbursement reimbursement = reimbursementService.update(reimbursementRequest);
-            resp.setStatus(200); // UPDATED
+            resp.setStatus(202); // UPDATED
             resp.setContentType("application/json");
             String payload = mapper.writeValueAsString(new ResourceCreationResponse(reimbursement.getId()));
             respWriter.write(payload);
