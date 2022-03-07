@@ -9,6 +9,7 @@ com/revature/foundation/dtos/requests/ReimbursementRequest.class
 com/revature/foundation/dtos/responses/StatusUpdateResponse.class
 com/revature/foundation/dtos/responses/TypeUpdateResponse.class
 com/revature/foundation/dtos/requests/UpdateUserRequest.class
+com/revature/foundation/config/UserConfig.class
 com/revature/foundation/dtos/requests/DeleteRequest.class
 com/revature/foundation/dtos/responses/UpdateReimbursementResponse.class
 com/revature/foundation/dtos/responses/AppUserResponse.class
